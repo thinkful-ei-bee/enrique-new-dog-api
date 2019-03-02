@@ -23,7 +23,7 @@ function watchForm() {
 function getDogImages(number) {
   fetch(`https://dog.ceo/api/breeds/image/random/${number}`)
     .then(response => response.json())
-    .then(jsonObj => makeDogArray(jsonObj)).then(displayResults())
+    .then(jsonObj => makeDogArray(jsonObj)).then(displayResults)
     .catch(error => alert('Something happened! Try again.'));
 }
 
@@ -34,17 +34,17 @@ function makeDogArray(jsonObj){
 
 
 function displayResults() {
-
-  $('.results').replaceWith(makeHtml()) 
+console.log('getting to here')
+  $('.results').replaceWith(makeHtml());
 }
 
 function makeHtml(){
-    // return STORE.dogArray.map(i => `<img src="${STORE.dogArray[i]}" class="results">` );
-    let newArr=[];
-    for(let x = 0; x < STORE.dogArray.length; x++){
-        newArr.push(`<img src="${STORE.dogArray[x]}" class="results">`)
-}
-   return newArr;
+    return STORE.dogArray.map(i => `<img src="${i}" class="results">` );
+//     let newArr=[];
+//     for(let x = 0; x < STORE.dogArray.length; x++){
+//         newArr.push(`<img src="${STORE.dogArray[x]}" class="results">`)
+// }
+//    return newArr;
 } 
 
 

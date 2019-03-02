@@ -24,6 +24,7 @@ function handleNumberSubmit() {
     
   })
 }
+// ************* Number functions **************** //
 
 function getDogImages(number) {
   fetch(`https://dog.ceo/api/breeds/image/random/${number}`)
@@ -40,6 +41,9 @@ STORE.dogArray = x.message;
 function makeHtml(arr){
     return arr.map(i => `<img src="${i}" class="results">` );
 } 
+
+
+// ************* Breed functions **************** //
 
 function handleBreedSubmit(){
   $('#js-breed-entry').submit('.breed-search', event =>{
@@ -62,6 +66,8 @@ function displayBreed(x){
 
 }
 
+
+// ************* doc ready functions **************** //
 $(function() {
   console.log('App loaded! Waiting for submit!');
   handleNumberSubmit();

@@ -19,7 +19,6 @@ function handleNumberSubmit() {
           return alert('Please choose a valid number');
       } 
           STORE.userNumber = $('.user-number').val();
-          console.log(STORE.userNumber);
           getDogImages(STORE.userNumber);
     
   })
@@ -49,23 +48,20 @@ function handleBreedSubmit(){
   $('#js-breed-entry').submit('.breed-search', event =>{
     event.preventDefault();
     STORE.breedSearch = $('.breed-search').val();
-    console.log(STORE.breedSearch);
     getDogBreed(STORE.breedSearch);
   })
 }
 function getDogBreed(breed){
   fetch(`https://dog.ceo/api/breed/${breed}/images`)
-      .then(response => response.json())
+      .then(response =>  response.json())
       .then(jsonObj => displayBreed(jsonObj))
       .catch(error => alert('Something happened! Try again some other time.'));
 }
 function displayBreed(x){
-  STORE.breedArray = x.message[0];
-  console.log(STORE.breedArray);
+  (x.status === "error") ? alert(`${x.message}. Please try again`): 
+  STORE.breedArray = x.message[15];
   $('.results').replaceWith(`<img src="${STORE.breedArray}" class="results">`);
-
 }
-
 
 // ************* doc ready functions **************** //
 $(function() {

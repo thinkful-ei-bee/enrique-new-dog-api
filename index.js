@@ -23,28 +23,17 @@ function watchForm() {
 function getDogImages(number) {
   fetch(`https://dog.ceo/api/breeds/image/random/${number}`)
     .then(response => response.json())
-    .then(jsonObj => makeDogArray(jsonObj)).then(displayResults)
+    .then(jsonObj => displayResults(jsonObj))
     .catch(error => alert('Something happened! Try again.'));
 }
 
-function makeDogArray(jsonObj){
-    STORE.dogArray = jsonObj.message;
-    // console.log (STORE.dogArray);    
-}
-
-
-function displayResults() {
-console.log('getting to here')
+function displayResults(x) {
+STORE.dogArray = x.message;
   $('.results').replaceWith(makeHtml());
 }
 
 function makeHtml(){
     return STORE.dogArray.map(i => `<img src="${i}" class="results">` );
-//     let newArr=[];
-//     for(let x = 0; x < STORE.dogArray.length; x++){
-//         newArr.push(`<img src="${STORE.dogArray[x]}" class="results">`)
-// }
-//    return newArr;
 } 
 
 

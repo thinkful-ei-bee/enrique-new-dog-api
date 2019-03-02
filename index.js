@@ -12,15 +12,10 @@ const STORE = {
 function handleNumberSubmit() {
     $('#js-number-entry').submit('.user-number', event => {
       event.preventDefault();
-      if ($('.user-number').val()=== ''){
-         $('.user-number').val(3);
-     }
-      if ($('.user-number').val() > 50 || $('.user-number').val() < 1) {
-          return alert('Please choose a valid number');
-      } 
-          STORE.userNumber = $('.user-number').val();
-          getDogImages(STORE.userNumber);
-    
+      ($('.user-number').val()=== '') ? $('.user-number').val(3):
+      ($('.user-number').val() > 50 || $('.user-number').val() < 1) ? alert('Please choose a valid number') :
+      STORE.userNumber = $('.user-number').val();
+      getDogImages(STORE.userNumber);
   })
 }
 // ************* Number functions **************** //

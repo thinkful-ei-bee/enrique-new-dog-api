@@ -1,4 +1,6 @@
 'use strict';
+
+
 const STORE = {
     userNumber: 0,
     dogArray: [],
@@ -8,34 +10,42 @@ function watchForm() {
     $('form').on('submit', event => {
       event.preventDefault();
       if ($('.user-number').val() > 50) {
-          return alert('Please choose a valid number')
+          return alert('Please choose a valid number');
       }else {
-          STORE.userNumber = $('.userNumber').val();
+          STORE.userNumber = $('.user-number').val();
           console.log(STORE.userNumber);
-          getDogImage(STORE.userNumber);
+          getDogImages(STORE.userNumber);
     }
   })
 }
 
 
-function getDogImage(number) {
-  fetch(`https://dog.ceo/api/breeds/image/random/${STORE.userNumber}`)
+function getDogImages(number) {
+  fetch(`https://dog.ceo/api/breeds/image/random/${number}`)
     .then(response => response.json())
-    .then(jsonObj => 
-      displayResults(jsonObj))
-    .catch(error => alert('Something happened! Try again'));
+    .then(jsonObj => makeDogArray(jsonObj)).then(displayResults())
+    .catch(error => alert('Something happened! Try again.'));
 }
 
-function displayResults(responseJson) {
-  console.log(responseJson);
-  //replace the existing image with the new one
-  $('.results-img').replaceWith(
-    `<img src="${responseJson.message}" class="results-img">`
-  )
-  //display the results section
-  $('.results').removeClass('hidden');
+function makeDogArray(jsonObj){
+    STORE.dogArray = jsonObj.message;
+    // console.log (STORE.dogArray);    
 }
 
+
+function displayResults() {
+
+  $('.results').replaceWith(makeHtml()) 
+}
+
+function makeHtml(){
+    // return STORE.dogArray.map(i => `<img src="${STORE.dogArray[i]}" class="results">` );
+    let newArr=[];
+    for(let x = 0; x < STORE.dogArray.length; x++){
+        newArr.push(`<img src="${STORE.dogArray[x]}" class="results">`)
+}
+   return newArr;
+} 
 
 
 $(function() {
